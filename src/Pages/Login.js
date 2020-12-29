@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import 'antd/dist/antd.css'
 import {Card,Input,Button,Spin,message } from 'antd'
 import { Icon } from '@ant-design/compatible';
@@ -11,6 +11,14 @@ function Login(props){
   const [userName,setUserName] = useState('')
   const [password,setPassword] = useState('')
   const [isLoading,setIsLoading] = useState(false)
+  
+    const onKeyDownchange = (e)=>{
+      if(e.keyCode == 0){
+          //事件操作
+          checkLogin()
+      }
+    }
+
   const checkLogin = ()=>{
     setIsLoading(true)
 
@@ -66,6 +74,7 @@ function Login(props){
                     /> 
                     <br/><br/>
                     <Input.Password
+                        onKeyPress={e => onKeyDownchange(e)}
                         id="password"
                         size="large"
                         placeholder="输入你的密码"
@@ -73,7 +82,7 @@ function Login(props){
                         onChange={(e)=>{setPassword(e.target.value)}}
                     />     
                     <br/><br/>
-                    <Button type="primary" size="large" block onClick={checkLogin} > 登陸 </Button>
+                    <Button type="primary" size="large"  block onClick={checkLogin} > 登陸 </Button>
                 </Card>
       </Spin>
     </div>
